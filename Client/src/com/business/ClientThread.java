@@ -8,8 +8,11 @@ package com.business;
 import com.entity.Server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
@@ -28,18 +31,37 @@ public class ClientThread implements Runnable, Serializable {
     /*provide setter and getter here*/
     
     public ClientThread(Server server, JTextArea txtContent) {
-        /*connect to server and get input/output stream here*/
-        
+        try {
+            this.txtContent = txtContent;
+            this.server = server;
+            /*connect to server and get input/output stream here*/
+            socket = new Socket(server.getHost(), server.getPort());
+            dis = new DataInputStream(socket.getInputStream());
+            dos = new DataOutputStream(socket.getOutputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void run() {
         /*receive message from server and output to txtContent*/
-
+        try {
+            while (true) {
+                Object line = dis.readUTF();
+                if(line != null) {
+                    txtContent.append("\n" + line);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void send(Object line) throws Exception {
         /*send a message line to server*/
+        dos.writeUTF(line.toString());
+        txtContent.append("\nMe:" + line);
     }
 
 }
