@@ -13,15 +13,32 @@ import java.net.Socket;
  * @author tiny
  */
 public class Client implements Serializable {
+    
+// Declare instances
     private String username, password;
     private Socket socket;
+    
+    // Contructors
+    public Client() {
+    }
+
+    public Client(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public Client(String username, String password, Socket socket) {
+        this.username = username;
+        this.password = password;
+        this.socket = socket;
+    }
 
     @Override
     public String toString() {
         return username; //To change body of generated methods, choose Tools | Templates.
     }
-
     
+    // Setter - Getter
     public Socket getSocket() {
         return socket;
     }
@@ -46,17 +63,4 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public Client() {
-    }
-
-    public Client(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public Client(String username, String password, Socket socket) {
-        this.username = username;
-        this.password = password;
-        this.socket = socket;
-    }
 }

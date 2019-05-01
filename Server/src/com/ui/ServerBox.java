@@ -5,17 +5,37 @@
  */
 package com.ui;
 
+import com.business.ServerThread;
+import com.entity.Server;
+import com.entity.Client;
+
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author tiny
  */
 public class ServerBox extends javax.swing.JFrame {
+    
+    public static DefaultListModel<Client> clients = new DefaultListModel<>();
+    public final String SERVER_NAME = "localhost";
+    public final int PORT = 1234;
 
     /**
      * Creates new form ServerBox
      */
     public ServerBox() {
         initComponents();
+        lstClients.setModel(clients);
+        if(serverThread == null) {
+            try {
+                Server server = new Server(SERVER_NAME, PORT);
+                serverThread = new ServerThread(server);
+                new Thread(serverThread).start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -27,22 +47,51 @@ public class ServerBox extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstClients = new javax.swing.JList();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Server Chat");
+
+        lstClients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstClientsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstClients);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Listen event when double click client's username
+    private void lstClientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstClientsMouseClicked
+        if(evt.getClickCount() == 2) {
+            ChatBox sc = new ChatBox(this, false);
+            sc.setUsername(lstClients.getSelectedValue().toString());
+            sc.setVisible(true);
+        }
+    }//GEN-LAST:event_lstClientsMouseClicked
+
+    ServerThread serverThread = null;
+    
     /**
      * @param args the command line arguments
      */
@@ -79,5 +128,8 @@ public class ServerBox extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList lstClients;
     // End of variables declaration//GEN-END:variables
 }

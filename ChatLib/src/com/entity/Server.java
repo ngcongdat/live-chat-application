@@ -13,9 +13,11 @@ import java.io.Serializable;
  */
 public class Server implements Serializable {
     
+    // Declare instances
     private String host;
     private int port;
 
+    // Contructors
     public Server() {
     }
 
@@ -24,6 +26,7 @@ public class Server implements Serializable {
         this.port = port;
     }
 
+    // Setter - Getter
     public String getHost() {
         return host;
     }
