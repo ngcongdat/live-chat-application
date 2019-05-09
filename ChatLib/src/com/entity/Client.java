@@ -13,54 +13,54 @@ import java.net.Socket;
  * @author tiny
  */
 public class Client implements Serializable {
-    
+
 // Declare instances
-    private String username, password;
-    private Socket socket;
-    
-    // Contructors
-    public Client() {
-    }
+  private String username, password;
+  private Socket socket;
 
-    public Client(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+  // Contructors
+  public Client() {
+  }
 
-    public Client(String username, String password, Socket socket) {
-        this.username = username;
-        this.password = password;
-        this.socket = socket;
-    }
+  public Client(String username, String password) {
+    this.username = username;
+    this.password = password;
+  }
 
-    @Override
-    public String toString() {
-        return username; //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    // Setter - Getter
-    public Socket getSocket() {
-        return socket;
-    }
+  public Client(String username, String password, Socket socket) {
+    this.username = username;
+    this.password = password;
+    this.socket = socket;
+  }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
-    }
-    
-    public String getUsername() {
-        return username;
-    }
+  @Override
+  public String toString() {
+    return username; //To change body of generated methods, choose Tools | Templates.
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  // Setter - Getter
+  public Socket getSocket() {
+    return socket;
+  }
 
-    public String getType() {
-        return password;
-    }
+  public void setSocket(Socket socket) {
+    this.socket = socket;
+  }
 
-    public void setType(String password) {
-        this.password = password;
-    }
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getType() {
+    return password;
+  }
+
+  public void setType(String password) {
+    this.password = password;
+  }
 
 }

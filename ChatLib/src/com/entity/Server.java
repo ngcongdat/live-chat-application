@@ -12,35 +12,35 @@ import java.io.Serializable;
  * @author tiny
  */
 public class Server implements Serializable {
-    
-    // Declare instances
-    private String host;
-    private int port;
 
-    // Contructors
-    public Server() {
-    }
+  // Declare instances
+  private String host;
+  private int port;
 
-    public Server(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
+  // Contructors
+  public Server() {
+  }
 
-    // Setter - Getter
-    public String getHost() {
-        return host;
-    }
+  public Server(String host, int port) {
+    this.host = host;
+    this.port = port;
+  }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
+  // Setter - Getter
+  public String getHost() {
+    return host;
+  }
 
-    public int getPort() {
-        return port;
-    }
+  public void setHost(String host) {
+    this.host = host;
+  }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-    
+  public int getPort() {
+    return port;
+  }
+
+  public void setPort(int port) {
+    this.port = port;
+  }
+
 }
