@@ -1,4 +1,4 @@
-# Gmail SMTP Application!
+# Live Chat Application!
 
 Hi! I'm Dat. This is a very simple Client/Server Chat Application using `TCP Sockets Java`. 
 
